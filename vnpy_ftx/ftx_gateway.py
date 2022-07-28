@@ -174,6 +174,8 @@ class OrderBook:
 
 class FtxGateway(BaseGateway):
     """vn.py用于对接FTX的交易接口"""
+    
+    default_name: str = "FTX"
 
     default_setting: Dict[str, Any] = {
         "key": "",
