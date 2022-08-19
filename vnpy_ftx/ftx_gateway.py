@@ -37,6 +37,11 @@ from vnpy_websocket import WebsocketClient
 from vnpy_rest import Request, RestClient
 from vnpy_rest.rest_client import Response
 
+import logging
+
+logger = logging.getLogger(__file__)
+logging.basicConfig(level=logging.INFO)
+
 
 # 中国时区
 CHINA_TZ = pytz.timezone("Asia/Shanghai")
@@ -944,7 +949,9 @@ class FtxWebsocketApi(WebsocketClient):
                 self.gateway.on_order(order)
 
             else:
-                print(packet)
+                logger.info(
+                    packet
+                )
 
         # 初始推送
         elif packet["type"] == "partial":
@@ -993,10 +1000,14 @@ class FtxWebsocketApi(WebsocketClient):
                     self.gateway.on_tick(copy(tick))
 
             else:
-                print(packet)
+                logger.info(
+                    packet
+                )
 
         else:
-            print(packet)
+            logger.info(
+                    packet
+                )
 
 
 def change_datetime(created_time: str) -> datetime:
